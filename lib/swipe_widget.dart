@@ -64,6 +64,25 @@ class _SwipeAnimationExampleState extends State<SwipeAnimationExample>
     _controller.forward(); // Start the animation
   }
 
+  // Method to trigger animation for left or right swipe using buttons
+  void _triggerSwipeAnimation(bool swipeRight) {
+    setState(() {
+      if (swipeRight) {
+        _tween.begin = Offset(0, 0);
+        _tween.end = Offset(2.0, 0); // Swipe Right
+      } else {
+        _tween.begin = Offset(0, 0);
+        _tween.end = Offset(-2.0, 0); // Swipe Left
+      }
+
+      // Move to the next image in the list after swipe
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+    });
+
+    _controller.reset(); // Reset the animation controller
+    _controller.forward(); // Start the animation
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,11 +118,36 @@ class _SwipeAnimationExampleState extends State<SwipeAnimationExample>
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _controller.reverse(); // Reset the animation when FAB is clicked
-        },
-        child: Icon(Icons.refresh),
+      floatingActionButton: Align(
+        alignment: Alignment.center, // Align to the left
+        child: Padding(
+          padding: const EdgeInsets.only(left: 0), // Customize left padding as needed
+          child: Row(
+            mainAxisSize: MainAxisSize.min, // Ensure row size is minimal
+            children: [
+              // Left swipe button
+              FloatingActionButton(
+                onPressed: () {
+                  _triggerSwipeAnimation(false); // Trigger swipe left animation
+                },
+                child: Icon(Icons.arrow_back),
+                heroTag: 'left-swipe-btn',
+                backgroundColor: Colors.red,
+              ),
+
+              SizedBox(width: 32), // Space between the buttons
+              // Right swipe button
+              FloatingActionButton(
+                onPressed: () {
+                  _triggerSwipeAnimation(true); // Trigger swipe right animation
+                },
+                child: Icon(Icons.arrow_forward),
+                heroTag: 'right-swipe-btn',
+                backgroundColor: Colors.green,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -39,51 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SwipeAnimationExample(),  // The swipe widget remains at the top
           ),
           // The bottom navigation bar is placed at the bottom
-          BottomNavigationBar(
-            currentIndex: _selectedIndex,  // Current selected index
-            onTap: _onItemTapped,  // Handle item tap
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Profile',
-              ),
-            ],
-            selectedItemColor: Colors.deepPurple,
-            unselectedItemColor: Colors.grey,
-            type: BottomNavigationBarType.fixed,
+          CustomBottomNavBar(
+            currentIndex: _selectedIndex, // Pass the current index
+            onTap: _onItemTapped,  // Handle item taps
           ),
         ],
       ),
     );
   }
 }
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("project_m"),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: SwipeAnimationExample(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Text("click"),
-      ),
-    );
-  }
-}
-
 
