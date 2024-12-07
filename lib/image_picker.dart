@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';  // For File
+
 
 class ImagePickerExample extends StatefulWidget {
   @override
@@ -13,6 +15,12 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
   // Create an instance of ImagePicker
   final ImagePicker _picker = ImagePicker();
 
+  // Get the local directory where images can be stored
+  Future<String> getLocalPath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
   // Function to pick an image from the gallery
   Future<void> _pickImage() async {
     final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -20,6 +28,8 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
       setState(() {
         _image = File(pickedFile.path); // Set the picked image to the File
       });
+      // Save the image locally
+      saveImageLocally(_image!);  // Pass the image to the save function
     }
   }
 
@@ -30,7 +40,23 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
       setState(() {
         _image = File(pickedFile.path); // Set the captured image to the File
       });
+      // Save the image locally
+      saveImageLocally(_image!);  // Pass the image to the save function
     }
+  }
+
+  // Save the picked image to local storage
+  Future<void> saveImageLocally(File imageFile) async {
+    final directory = await getLocalPath();
+    final fileName = DateTime.now().millisecondsSinceEpoch.toString() + '.jpg';  // Use unique file name
+    final localImage = File('$directory/$fileName');
+
+    // Copy the picked image to the local directory
+    await imageFile.copy(localImage.path);
+    setState(() {
+      _image = localImage;
+    });
+    print('Image saved at: ${localImage.path}');
   }
 
   @override
