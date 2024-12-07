@@ -16,9 +16,9 @@ class _SwipeAnimationExampleState extends State<SwipeAnimationExample>
 
   // List of images (you can swap these based on your needs)
   List<String> images = [
-    'https://images.pexels.com/photos/1212487/pexels-photo-1212487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'http://172.26.242.140:9000/mybucket/uploaded-images/1733596117080-pexels-photo-799443.jpeg',
+    'http://172.26.242.140:9000/mybucket/uploaded-images/1733596225027-pexels-photo-1366919.jpeg',
+    'http://172.26.242.140:9000/mybucket/uploaded-images/1733596241180-pexels-photo-1535162.jpeg',
   ];
 
   int currentImageIndex = 0;
