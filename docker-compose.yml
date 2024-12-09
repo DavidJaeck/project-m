@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.8'
 services:
   minio:
     image: minio/minio
@@ -7,8 +7,20 @@ services:
       - "9000:9000"
       - "9001:9001"
     volumes:
-      - /home/david/minio/data:/data
+      - ./data/minio:/data
     environment:
-      MINIO_ROOT_USER: root
+      MINIO_ROOT_USER: admin
       MINIO_ROOT_PASSWORD: password
     command: server /data --console-address ":9001"
+  db:
+    image: postgres:latest   # Use the latest official PostgreSQL image
+    container_name: my_postgres_db
+    environment:
+      POSTGRES_USER: admin      # Set the database user
+      POSTGRES_PASSWORD: password  # Set the database password
+      POSTGRES_DB: my_database      # Set the name of the default database
+    ports:
+      - "5432:5432"   # Expose PostgreSQL on port 5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data  # Persistent storage
+    restart: always  # Restart the container if it stops
