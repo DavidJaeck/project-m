@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'swipe_widget.dart';
 import 'nav_bar.dart';
 import 'image_picker.dart';
+import 'saved_image.dart';
+
 
 void main() {
   runApp(MaterialApp(
@@ -23,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _widgetOptions = [
     SwipeAnimationExample(), // Displayed when Home tab is selected
     ImagePickerExample(), // Placeholder for Search
-    Center(child: Text("Profile Screen")), // Placeholder for Profile
+    ImageDisplayWidget()
   ];
 
   // Called when an item is tapped in the bottom nav bar
