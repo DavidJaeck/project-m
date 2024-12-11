@@ -1,53 +1,47 @@
 import 'package:flutter/material.dart';
-import 'swipe_widget.dart';
-import 'nav_bar.dart';
-import 'image_picker.dart';
-import 'saved_image.dart';
-
+import 'default_screen.dart';
+import 'auth.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: HomeScreen(),
-  ));
+  runApp(MyApp());
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+class MyApp extends StatelessWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AppWidget(), // Set the root widget to AppWidget
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;  // Tracks the currently selected index in the bottom navbar
+class AppWidget extends StatefulWidget {
+  @override
+  _AppWidgetState createState() => _AppWidgetState();
+}
 
-  // List of widgets corresponding to the bottom nav items
-  List<Widget> _widgetOptions = [
-    SwipeAnimationExample(), // Displayed when Home tab is selected
-    ImagePickerExample(), // Placeholder for Search
-    ImageDisplayWidget()
-  ];
+class _AppWidgetState extends State<AppWidget> {
+  bool _isLoggedIn = false; // Manages login state
 
-  // Called when an item is tapped in the bottom nav bar
-  void _onItemTapped(int index) {
+  void _loginUser(String email, String password) {
+    // Simulate a login process (e.g., call an API or Firebase)
+    print('User logged in with Email: $email and Password: $password');
     setState(() {
-      _selectedIndex = index;  // Update the selected index
+      _isLoggedIn = true; // User is now logged in
+    });
+  }
+
+  void _logoutUser() {
+    setState(() {
+      _isLoggedIn = false; // User is now logged out
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Swipe Animation with Navbar"),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: _widgetOptions.elementAt(_selectedIndex),  // Render widget based on selected index
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _selectedIndex,  // Pass the current index
-        onTap: _onItemTapped,  // Handle item taps
-      ),
-    );
+    return _isLoggedIn
+        ? DefaultScreen(logoutCallback: _logoutUser)
+        : AuthWidget(loginCallback: _loginUser);
   }
 }
