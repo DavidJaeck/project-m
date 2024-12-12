@@ -1,4 +1,4 @@
-package de.djaeck.project_m;
+package de.djaeck.project_m.controller;
 
 import de.djaeck.project_m.service.S3Service;
 import org.springframework.http.ResponseEntity;

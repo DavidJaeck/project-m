@@ -19,6 +19,7 @@ public class User {
     private String name;
     private String email;
     private String phoneNumber;
+    private String password;
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     private Boolean isActive = true;
