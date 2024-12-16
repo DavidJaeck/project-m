@@ -7,7 +7,7 @@ import java.util.Date;
 @Service
 public class JWTService {
 
-    private final String SECRET_KEY = "password";  // You should store this securely, e.g., in environment variables
+    private final String SECRET_KEY = "passwordpasswordpasswordpasswordpasswordpassword";  // You should store this securely, e.g., in environment variables
 
     // Generate JWT token for a given user (e.g., id)
     public String generateToken(long id) {

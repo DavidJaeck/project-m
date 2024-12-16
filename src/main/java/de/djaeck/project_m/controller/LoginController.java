@@ -20,7 +20,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<String> loginUser(@RequestBody User user) {
-        User existingUser = userService.getUserByUsernameAndPassword(user.getId(), user.getPassword());
+        User existingUser = userService.getUserByIdAndPassword(user.getId(), user.getPassword());
 
         if (existingUser != null) {
             // Generate a JWT token for the existing user

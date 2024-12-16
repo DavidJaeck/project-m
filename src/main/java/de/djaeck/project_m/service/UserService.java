@@ -22,13 +22,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserByUsername(String username) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+    public User getUserById(long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.orElse(null);
     }
 
-    public User getUserByUsernameAndPassword(long id, String password) {
-        Optional<User> optionalUser = userRepository.findByUsernameAndPassword(id, password);
+    public User getUserByIdAndPassword(long id, String password) {
+        Optional<User> optionalUser = userRepository.findByIdAndPassword(id, password);
         return optionalUser.orElse(null);
     }
 }
